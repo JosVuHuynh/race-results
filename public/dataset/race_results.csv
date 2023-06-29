@@ -1,4 +1,4 @@
-grandPrix;date; winner; car;laps;time
+grandPrix;date;winner;car;laps;time
 Great Britain;13 May 1950;Nino Farina;Alfa Romeo;70;2:13:23.600
 Monaco;21 May 1950;Juan Manuel Fangio;Alfa Romeo;100;3:13:18.700
 Indianapolis 500;30 May 1950;Johnnie Parsons;Kurtis Kraft Offenhauser;138;2:46:55.970
@@ -1081,7 +1081,7 @@ United States;23 Oct 2022;Max Verstappen;RED BULL RACING RBPT;56;1:42:11.687
 Mexico;30 Oct 2022;Max Verstappen;RED BULL RACING RBPT;71;1:38:36.729
 Brazil;13 Nov 2022;George Russell;MERCEDES;71;1:38:34.044
 Abu Dhabi;20 Nov 2022;Max Verstappen;RED BULL RACING RBPT;58;1:27:45.914
-hrain;05 Mar 2023;Max Verstappen;RED BULL RACING HONDA RBPT;57;1:33:56.736
+Bahrain;05 Mar 2023;Max Verstappen;RED BULL RACING HONDA RBPT;57;1:33:56.736
 Saudi Arabia;19 Mar 2023;Sergio Perez;RED BULL RACING HONDA RBPT;50;1:21:14.894
 Australia;02 Apr 2023;Max Verstappen;RED BULL RACING HONDA RBPT;58;2:32:38.371
 Azerbaijan;30 Apr 2023;Sergio Perez;RED BULL RACING HONDA RBPT;51;1:32:42.436
