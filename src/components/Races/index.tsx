@@ -1,14 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import SearchIcon from "@mui/icons-material/Search";
-import ClearIcon from "@mui/icons-material/Clear";
 import getDataResults from '../../utils/handleCsv';
 import DataTable from '../DataTable';
-import {
-    FormControl,
-    InputAdornment,
-    TextField,
-  } from "@mui/material";
-import { ColumnRacesResults , DataRaceResult} from '../../utils/type';
+import { ColumnRacesResults , DataRaceResult, FilterDataRaceResult} from '../../utils/type';
+import { getRaceResultsBySearch } from '../../utils/handleSearch';
 
 
 export default function Races() {
@@ -24,7 +18,7 @@ export default function Races() {
         {
           id: 'winner',
           label: 'Winner',
-          minWidth: 200,
+          minWidth: 170,
         },
         {
           id: 'car',
@@ -34,83 +28,43 @@ export default function Races() {
         {
           id: 'laps',
           label: 'Laps',
-          minWidth: 50,
+          minWidth: 70,
         },
         {
           id: 'time',
           label: 'Time',
-          minWidth: 170,
+          minWidth: 90,
         },
-      ];
-    
-      const [showClearIcon, setShowClearIcon] = useState("none");
-      const [keywordSearch, setKeywordSearch] = useState('')
-    
-      const handleChangeSearch = (event: React.ChangeEvent<HTMLInputElement>): void => {
-        setShowClearIcon(event.target.value === "" ? "none" : "flex");
-        setKeywordSearch(event.target.value);
-      };
-    
-      const handleClick = (): void => {
-        // TODO: Clear the search input
-        setKeywordSearch('')
-      };
-    
-      const [raceResults, setRaceResults] = useState<DataRaceResult[]>([]);
-      const [raceResultsSearch, setRaceResultsSearch] = useState<DataRaceResult[]>([]);
-    
-      useEffect(() => {
-        getDataRaceResults();
-      }, [])
-    
-      useEffect(() => {
-        getDataRaceResultsBySearch();
-      }, [keywordSearch])
-    
-      function getDataRaceResultsBySearch() {
-          const resultSearch = raceResults.filter(result => 
-              result.grandPrix.includes(keywordSearch) ||
-              result.date.includes(keywordSearch) ||
-              result.winner.includes(keywordSearch) ||
-              result.car.includes(keywordSearch) ||
-              result.laps.includes(keywordSearch) ||
-              result.time.includes(keywordSearch)
-              )
-          setRaceResultsSearch(resultSearch);
-      }
+    ];
 
+    const [raceResults, setRaceResults] = useState<DataRaceResult[]>([]);
+    const [raceSearchResults, setRaceSearchResults] = useState<DataRaceResult[]>([]);
+    const [keywordsSearch, setKeywordsSearch] = useState<FilterDataRaceResult>({
+        grandPrix: '',
+        date: '',
+        winner: '',
+        car: '',
+    })
+    
+    useEffect(() => {
+        getDataRaceResults();
+    }, [])
+  
     async function getDataRaceResults() {
         setRaceResults(await getDataResults('dataset/race_results.csv'));
-        setRaceResultsSearch(await getDataResults('dataset/race_results.csv'))
+        setRaceSearchResults(await getDataResults('dataset/race_results.csv'))
+    }
+   
+    const handleChangeSearch = (keyword: string, key: string) => {
+        if (keywordsSearch.hasOwnProperty(key) ){
+            keywordsSearch[key as keyof typeof keywordsSearch] = keyword;
+            setRaceSearchResults(getRaceResultsBySearch(raceResults, keywordsSearch))
+        }
     }
   
   return (
     <div>
-        <FormControl >
-            <TextField
-            size="small"
-            variant="outlined"
-            onChange={handleChangeSearch}
-            InputProps={{
-                startAdornment: (
-                <InputAdornment position="start">
-                    <SearchIcon />
-                </InputAdornment>
-                ),
-                endAdornment: (
-                <InputAdornment
-                    position="end"
-                    style={{ display: showClearIcon }}
-                    onClick={handleClick}
-                >
-                    <ClearIcon />
-                </InputAdornment>
-                )
-            }}
-            />
-        </FormControl>
-
-        <DataTable columns={columns} resultData={raceResults} />
+        <DataTable columns={columns} resultData={raceSearchResults} typeTable={'race'} handleChangeSearch={handleChangeSearch}/>
     </div>
   )
 }

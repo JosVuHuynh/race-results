@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableContainer from '@mui/material/TableContainer';
@@ -8,12 +8,25 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import { ColumnDrivers, ColumnFastestLap, ColumnRacesResults, ColumnTeams, DataDrivers, DataFastestLap, DataRaceResult, DataTableProps, DataTeams } from '../../utils/type';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
+import FormHelperText from '@mui/material/FormHelperText';
+import { DataTableProps, IdColumnDrivers, IdColumnRaceResult, IdColumnTeams, IdFastestLap } from '../../utils/type';
+import FilledInput from '@mui/material/FilledInput';
+import SearchIcon from "@mui/icons-material/Search";
+
+import {
+    FormControl,
+    InputAdornment,
+    TextField,
+  } from "@mui/material";
+import { getRaceResultsBySearch } from '../../utils/handleSearch';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
+    // backgroundColor: theme.palette.common.black,
+    backgroundColor: '#f1f5f9',
+    //color: theme.palette.common.white,
     },
     [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
@@ -21,7 +34,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
   
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
-    '&:nth-of-type(odd)': {
+    '&:nth-of-type(even)': {
         backgroundColor: theme.palette.action.hover,
     },
     // hide last border
@@ -30,16 +43,16 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     },
 }));
 
-export default function DataTable({columns, resultData}: DataTableProps) {
+export default function DataTable({columns, resultData, typeTable, handleChangeSearch}: DataTableProps) {
   
     const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(10);
+    const [rowsPerPage, setRowsPerPage] = React.useState(10);  
   
     const handleChangePage = (event: unknown, newPage: number) => {
       setPage(newPage);
     };
   
-    const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement >) => {
       setRowsPerPage(+event.target.value);
       setPage(0);
     };
@@ -51,15 +64,43 @@ export default function DataTable({columns, resultData}: DataTableProps) {
             <Table stickyHeader aria-label="sticky table">
             <TableHead>
                 <TableRow>
-                {columns.map((column) => (
-                    <StyledTableCell
-                    key={column.id}
-                    align={column.align}
-                    style={{ minWidth: column.minWidth, fontSize: 16}}
-                    >
-                    {column.label}
-                    </StyledTableCell>
-                ))}
+                    {columns.map((column) => (
+                        <StyledTableCell
+                        key={column.id}
+                        align={column.align}
+                        style={{ minWidth: column.minWidth, fontSize: 14, color: 'gray', fontWeight: 'bold', 
+                                    paddingTop: (column.id === 'id' || column.id === 'time' || column.id === 'laps' || column.id === 'pts') ? '40px': '',
+                                }}
+                        >
+                        {column.label}
+                            {   
+                                !(column.id === 'id' || column.id === 'time' || column.id === 'laps' || column.id === 'pts') &&
+                                <FormControl style={{display: 'block'}}>
+                                       <TextField
+                                        size="small"
+                                        variant="outlined"
+                                        onChange={event => {handleChangeSearch(event.target.value, column.id)}}
+                                        InputProps={{
+                                            startAdornment: (
+                                            <InputAdornment position="start">
+                                                {/* <SearchIcon /> */}
+                                            </InputAdornment>
+                                            ),
+                                            endAdornment: (
+                                            <InputAdornment
+                                                position="end"
+                                                style={{ }}
+                                            >
+                                            </InputAdornment>
+                                            ),
+                                            
+                                        }}
+                                       />
+                                   </FormControl>
+                            }
+                     
+                        </StyledTableCell>
+                    ))}
                 </TableRow>
             </TableHead>
             <TableBody>
