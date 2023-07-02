@@ -8,12 +8,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputLabel from '@mui/material/InputLabel';
-import FormHelperText from '@mui/material/FormHelperText';
-import { DataTableProps, IdColumnDrivers, IdColumnRaceResult, IdColumnTeams, IdFastestLap } from '../../utils/type';
-import FilledInput from '@mui/material/FilledInput';
-import SearchIcon from "@mui/icons-material/Search";
+import { DataTableProps} from '../../utils/type';
 
 import {
     FormControl,

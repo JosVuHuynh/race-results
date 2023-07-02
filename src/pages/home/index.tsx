@@ -7,6 +7,7 @@ import Races from '../../components/Races';
 import Drivers from '../../components/Drivers';
 import Teams from '../../components/Teams';
 import FastestLapAward from '../../components/FastestLapAward';
+import Record from '../../components/Record';
 
   
 export default function Home() {
@@ -45,6 +46,7 @@ export default function Home() {
                             <LinkTab label="DRIVERS" pathname='/drivers' {...a11yProps(1)}/>
                             <LinkTab label="TEAMS" pathname="/teams" {...a11yProps(2)}/>
                             <LinkTab label="DHL FASTEST LAP AWARD" pathname="/fastestLapAward" {...a11yProps(3)}/>
+                            <LinkTab label="RECORD" pathname="/record" {...a11yProps(4)} />
                         </Tabs>
                     </Box>
                 </Box>
@@ -53,6 +55,8 @@ export default function Home() {
                     <Route path="/drivers" element={<Drivers/>} />
                     <Route path="/teams" element={<Teams/>} />
                     <Route path="/fastestLapAward" element={<FastestLapAward/>} />
+                    <Route path="/record" element={<Record/>} />
+
                 </Routes>
             </BrowserRouter>
         </div>

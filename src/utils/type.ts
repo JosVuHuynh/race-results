@@ -113,3 +113,7 @@ export type  IdColumnDrivers = 'id' | 'year' | 'pos' | 'driver' | 'nationality' 
 export type IdColumnTeams = 'id' | 'year' | 'pos' | 'team' | 'pts';
 
 export type IdFastestLap = 'id' | 'year' | 'grandPrix' | 'driver' | 'car' | 'time';
+
+export interface SeriesData  {
+    data: any[];
+}
