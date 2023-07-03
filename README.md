@@ -1,47 +1,34 @@
-# Getting Started with Create React App
+## I . Implementation process
+- Craw data : get Csv file from https://www.kaggle.com/datasets/aadiltajani/fia-f1-19502019-data and save at `public/dataset` folder
+- Implement UI using `React TypeScript`, `Material UI`, `apexcharts`
+- Deploy product on vercel.com
+- link github: https://github.com/JosVuHuynh/race-results
+- link Production: https://race-results-mb2c72r4r-josvuhuynh.vercel.app/
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### II. Features
+There are 5 Tab in Product:
+- The first Tab is RACES: display table of races result 1950 - 2023, User can search by GrandPrix, Date, Winnner or Car.
+  ![](src/assets/images/1.png)
 
-## Available Scripts
+- The second Tab is DRIVERS: display table of drivers result 1950 - 2023, User can search by Year, Position, Driver, Nationality or Car.
+  ![](src/assets/images/2.png)
 
-In the project directory, you can run:
+- The third Tab is TEAMS: display table of teams result 1950 - 2023, User can search by Year, Position, Team.
+  ![](src/assets/images/3.png)
 
-### `npm start`
+- The fourth Tab is DH FASTED LAP AWARD : display table of fastest lap award 1950 - 2023 , User can search by Year, GrandPrix, Driver, Car.
+  ![](src/assets/images/4.png)
+ 
+- the Fifth Tab is Record: display chart of Top 10 best Drivers and best Teams since 1950.
+![](src/assets/images/5.png)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## III. Running
 
-### `npm test`
+- Clone repository:  `git clone https://github.com/JosVuHuynh/race-results.git`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- install pakages `npm install`
 
-### `npm run build`
+- run `npm start`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
+- go to `http://localhost:3000/` to see result
